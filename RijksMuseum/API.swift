@@ -11,14 +11,20 @@ class API {
     static let apiKey = "LazakTr7"
     
     enum EndPoint {
-        case listAllWorks
+        case listAllCollection
+        case requestCollectionDetails
+        case requestCollectionImage
         var url: URL {
             return URL(string: self.stringValue)!
         }
         var stringValue: String {
             switch self {
-            case .listAllWorks:
+            case .listAllCollection:
                 return "https://www.rijksmuseum.nl/api/en/collection?key=[\(apiKey)]"
+            case .requestCollectionDetails:
+                return "https://www.rijksmuseum.nl/api/en/collection/SK-C-5?key=[\(apiKey)]"
+            case .requestCollectionImage:
+                return "https://www.rijksmuseum.nl/api/en/collection/SK-C-5/tiles?key=[\(apiKey)]"
             }
         }
     }
