@@ -10,7 +10,7 @@ import Foundation
 class API {
     static let apiKey = "LazakTr7"
     
-    enum EndPoint {
+    enum EndPoints {
         case listAllCollection
         case requestCollectionDetails
         case requestCollectionImage
@@ -30,6 +30,15 @@ class API {
     }
     
     func requestRijksCollection(completionHandler: @escaping (RijksData?, Error?) -> Void) {
-        
+        let task = URLSession.shared.dataTask(with: EndPoints.listAllCollection.url, completionHandler: { (data, response, error) in
+            guard let data = data else {
+                completionHandler(nil, error)
+                return
+            }
+            let decoder = JSONDecoder()
+            let downloadedImageData = try! decoder.decode(RijksData.self, from: data)
+            completionHandler(downloadedImageData, nil)
+        })
+        task.resume()
     }
 }

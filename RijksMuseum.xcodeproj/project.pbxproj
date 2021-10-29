@@ -15,6 +15,8 @@
 		31884B0E272C3F6F0020C358 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 31884B0C272C3F6F0020C358 /* LaunchScreen.storyboard */; };
 		31884B16272C3F900020C358 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31884B15272C3F900020C358 /* API.swift */; };
 		31884B18272C470F0020C358 /* RijksData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31884B17272C470F0020C358 /* RijksData.swift */; };
+		31884B1B272C75100020C358 /* ArtElementCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31884B19272C75100020C358 /* ArtElementCollectionViewCell.swift */; };
+		31884B1C272C75100020C358 /* ArtElementCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 31884B1A272C75100020C358 /* ArtElementCollectionViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +30,8 @@
 		31884B0F272C3F6F0020C358 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		31884B15272C3F900020C358 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		31884B17272C470F0020C358 /* RijksData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RijksData.swift; sourceTree = "<group>"; };
+		31884B19272C75100020C358 /* ArtElementCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtElementCollectionViewCell.swift; sourceTree = "<group>"; };
+		31884B1A272C75100020C358 /* ArtElementCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ArtElementCollectionViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,14 +67,32 @@
 				31884B01272C3F6E0020C358 /* AppDelegate.swift */,
 				31884B03272C3F6E0020C358 /* SceneDelegate.swift */,
 				31884B05272C3F6E0020C358 /* ViewController.swift */,
-				31884B15272C3F900020C358 /* API.swift */,
-				31884B17272C470F0020C358 /* RijksData.swift */,
+				31884B1D272C79420020C358 /* Custom cell */,
+				31884B1E272C795D0020C358 /* Model */,
 				31884B07272C3F6E0020C358 /* Main.storyboard */,
 				31884B0A272C3F6F0020C358 /* Assets.xcassets */,
 				31884B0C272C3F6F0020C358 /* LaunchScreen.storyboard */,
 				31884B0F272C3F6F0020C358 /* Info.plist */,
 			);
 			path = RijksMuseum;
+			sourceTree = "<group>";
+		};
+		31884B1D272C79420020C358 /* Custom cell */ = {
+			isa = PBXGroup;
+			children = (
+				31884B19272C75100020C358 /* ArtElementCollectionViewCell.swift */,
+				31884B1A272C75100020C358 /* ArtElementCollectionViewCell.xib */,
+			);
+			path = "Custom cell";
+			sourceTree = "<group>";
+		};
+		31884B1E272C795D0020C358 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				31884B17272C470F0020C358 /* RijksData.swift */,
+				31884B15272C3F900020C358 /* API.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -132,6 +154,7 @@
 			files = (
 				31884B0E272C3F6F0020C358 /* LaunchScreen.storyboard in Resources */,
 				31884B0B272C3F6F0020C358 /* Assets.xcassets in Resources */,
+				31884B1C272C75100020C358 /* ArtElementCollectionViewCell.xib in Resources */,
 				31884B09272C3F6E0020C358 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -146,6 +169,7 @@
 				31884B06272C3F6E0020C358 /* ViewController.swift in Sources */,
 				31884B02272C3F6E0020C358 /* AppDelegate.swift in Sources */,
 				31884B18272C470F0020C358 /* RijksData.swift in Sources */,
+				31884B1B272C75100020C358 /* ArtElementCollectionViewCell.swift in Sources */,
 				31884B16272C3F900020C358 /* API.swift in Sources */,
 				31884B04272C3F6E0020C358 /* SceneDelegate.swift in Sources */,
 			);

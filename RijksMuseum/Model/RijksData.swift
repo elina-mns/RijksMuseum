@@ -32,5 +32,5 @@ struct ArtObjects: Codable {
 }
 
 struct WebImage: Codable {
-    let url: URL
+    let url: URL?
 }
