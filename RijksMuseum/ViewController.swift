@@ -12,7 +12,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var topLabel: UILabel!
     @IBOutlet weak var collectionView: UICollectionView!
     
-    var museumCollection: [RijksData] = []
+    var museumCollection: RijksData?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,7 +30,7 @@ class ViewController: UIViewController {
                 }
                 return
             }
-            self.museumCollection = [responseExpected]
+            self.museumCollection = responseExpected
             DispatchQueue.main.async {
                 self.collectionView.reloadData()
             }
@@ -43,19 +43,19 @@ class ViewController: UIViewController {
 extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        museumCollection.count
+        museumCollection?.artObjects.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ArtElementCollectionViewCell.identifier, for: indexPath) as? ArtElementCollectionViewCell else {
             fatalError()
         }
-        let item = museumCollection[indexPath.row]
-        let museumItem = item.artObjects[indexPath.row]
-        cell.name.text = museumItem.longTitle
+        let item = museumCollection
+        let museumItem = item?.artObjects[indexPath.row]
+        cell.name.text = museumItem?.longTitle
         
-        if museumItem.webImage.url != nil {
-            cell.imageView.downloaded(from: museumItem.webImage.url!) { (image) in
+        if museumItem?.webImage.url != nil {
+            cell.imageView.downloaded(from: (museumItem?.webImage.url!)!) { (image) in
                 if image != nil {
                     DispatchQueue.main.async {
                         cell.imageView.image = image
@@ -69,7 +69,6 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource {
         }
         return cell
     }
-    
 }
 
 //MARK: - Extension for UIImageView to process the link in JSON
