@@ -19,12 +19,15 @@ class ViewController: UIViewController {
     var museumCollection: RijksData?
     
     private lazy var dataSource = makeDataSource()
-    typealias DataSource = UICollectionViewDiffableDataSource<Section, RijksData>
+    
+    typealias DataSource = UICollectionViewDiffableDataSource<Section, ArtObject>
+    typealias Snapshot = NSDiffableDataSourceSnapshot<Section, ArtObject>
     
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView.register(ArtElementCollectionViewCell.nib(), forCellWithReuseIdentifier: ArtElementCollectionViewCell.identifier)
         fetchMuseumCollection()
+        applySnapshot(animatingDifferences: false)
     }
     
     func makeDataSource() -> DataSource {
@@ -58,6 +61,14 @@ class ViewController: UIViewController {
         return dataSource
     }
     
+    func applySnapshot(animatingDifferences: Bool = true) {
+        guard let objects = museumCollection?.artObjects else { return }
+        var snapshot = Snapshot()
+        snapshot.appendSections([.main])
+        snapshot.appendItems(objects)
+        dataSource.apply(snapshot, animatingDifferences: animatingDifferences)
+    }
+    
     func fetchMuseumCollection() {
         API().requestRijksCollection { (response, error) in
             guard let responseExpected = response else {
@@ -68,10 +79,11 @@ class ViewController: UIViewController {
             }
             self.museumCollection = responseExpected
             DispatchQueue.main.async {
-                self.collectionView.reloadData()
+                self.applySnapshot()
             }
         }
     }
+    
 }
     
 //MARK: - Extension for UIImageView to process the link in JSON

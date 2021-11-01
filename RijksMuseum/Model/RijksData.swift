@@ -9,7 +9,7 @@ import UIKit
 
 struct RijksData: Codable, Hashable {
     let count: Int
-    let artObjects: [ArtObjects]
+    let artObjects: [ArtObject]
     
     enum CodingKeys: String, CodingKey {
         case count
@@ -17,9 +17,9 @@ struct RijksData: Codable, Hashable {
     }
 }
 
-struct ArtObjects: Codable, Hashable {
+struct ArtObject: Codable, Hashable {
     
-    static func == (lhs: ArtObjects, rhs: ArtObjects) -> Bool {
+    static func == (lhs: ArtObject, rhs: ArtObject) -> Bool {
         lhs.longTitle == rhs.longTitle &&
         lhs.principalOrFirstMaker == rhs.principalOrFirstMaker &&
         lhs.webImage == rhs.webImage &&
