@@ -9,17 +9,53 @@ import UIKit
 
 class ViewController: UIViewController {
     
+    enum Section {
+      case main
+    }
+    
     @IBOutlet weak var topLabel: UILabel!
     @IBOutlet weak var collectionView: UICollectionView!
     
     var museumCollection: RijksData?
     
+    private lazy var dataSource = makeDataSource()
+    typealias DataSource = UICollectionViewDiffableDataSource<Section, RijksData>
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView.register(ArtElementCollectionViewCell.nib(), forCellWithReuseIdentifier: ArtElementCollectionViewCell.identifier)
-        collectionView.delegate = self
-        collectionView.dataSource = self
         fetchMuseumCollection()
+    }
+    
+    func makeDataSource() -> DataSource {
+        let dataSource = DataSource(
+            collectionView: collectionView,
+            cellProvider: { (collectionView, indexPath, RijksData) ->
+                UICollectionViewCell? in
+    
+                let cell = collectionView.dequeueReusableCell(
+                    withReuseIdentifier: ArtElementCollectionViewCell.identifier,
+                    for: indexPath) as? ArtElementCollectionViewCell
+                let item = self.museumCollection
+                let museumItem = item?.artObjects[indexPath.row]
+                cell?.name.text = museumItem?.longTitle
+                
+                if museumItem?.webImage.url != nil {
+                    cell?.imageView.downloaded(from: (museumItem?.webImage.url!)!) { (image) in
+                        if image != nil {
+                            DispatchQueue.main.async {
+                                cell?.imageView.image = image
+                            }
+                        } else {
+                            DispatchQueue.main.async {
+                                cell?.imageView.image = UIImage(named: "error")
+                            }
+                        }
+                    }
+                }
+                return cell
+            })
+        return dataSource
     }
     
     func fetchMuseumCollection() {
@@ -38,39 +74,6 @@ class ViewController: UIViewController {
     }
 }
     
-    //MARK: Collection View Methods
-    
-extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource {
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        museumCollection?.artObjects.count ?? 0
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ArtElementCollectionViewCell.identifier, for: indexPath) as? ArtElementCollectionViewCell else {
-            fatalError()
-        }
-        let item = museumCollection
-        let museumItem = item?.artObjects[indexPath.row]
-        cell.name.text = museumItem?.longTitle
-        
-        if museumItem?.webImage.url != nil {
-            cell.imageView.downloaded(from: (museumItem?.webImage.url!)!) { (image) in
-                if image != nil {
-                    DispatchQueue.main.async {
-                        cell.imageView.image = image
-                    }
-                } else {
-                    DispatchQueue.main.async {
-                        cell.imageView.image = UIImage(named: "error")
-                    }
-                }
-            }
-        }
-        return cell
-    }
-}
-
 //MARK: - Extension for UIImageView to process the link in JSON
 
 extension UIImageView {

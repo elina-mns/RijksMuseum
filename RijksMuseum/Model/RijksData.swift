@@ -7,7 +7,7 @@
 
 import UIKit
 
-struct RijksData: Codable {
+struct RijksData: Codable, Hashable {
     let count: Int
     let artObjects: [ArtObjects]
     
@@ -17,7 +17,15 @@ struct RijksData: Codable {
     }
 }
 
-struct ArtObjects: Codable {
+struct ArtObjects: Codable, Hashable {
+    
+    static func == (lhs: ArtObjects, rhs: ArtObjects) -> Bool {
+        lhs.longTitle == rhs.longTitle &&
+        lhs.principalOrFirstMaker == rhs.principalOrFirstMaker &&
+        lhs.webImage == rhs.webImage &&
+        lhs.productionPlaces == rhs.productionPlaces
+    }
+    
     let longTitle: String
     let principalOrFirstMaker: String
     let webImage: WebImage
@@ -31,6 +39,6 @@ struct ArtObjects: Codable {
     }
 }
 
-struct WebImage: Codable {
+struct WebImage: Codable, Hashable {
     let url: URL?
 }
