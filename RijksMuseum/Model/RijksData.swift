@@ -8,7 +8,7 @@
 import UIKit
 
 struct RijksData: Codable {
-    let count: String
+    let count: Int
     let artObjects: [ArtObjects]
     
     enum CodingKeys: String, CodingKey {

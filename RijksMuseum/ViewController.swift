@@ -23,7 +23,18 @@ class ViewController: UIViewController {
     }
     
     func fetchMuseumCollection() {
-        
+        API().requestRijksCollection { (response, error) in
+            guard let responseExpected = response else {
+                DispatchQueue.main.async {
+                    self.showAlert(title: "Error", message: "Couldn't upload data this time.", okAction: nil)
+                }
+                return
+            }
+            self.museumCollection = [responseExpected]
+            DispatchQueue.main.async {
+                self.collectionView.reloadData()
+            }
+        }
     }
 }
     
@@ -72,7 +83,7 @@ extension UIImageView {
                 let mimeType = response?.mimeType, mimeType.hasPrefix("image"),
                 let data = data, error == nil,
                 let image = UIImage(data: data)
-                else {
+            else {
                 completion?(nil)
                 return
             }
@@ -81,5 +92,17 @@ extension UIImageView {
                 completion?(image)
             }
         }.resume()
+    }
+}
+
+//MARK: Alert Extension
+
+extension UIViewController {
+    func showAlert(title: String, message: String, okAction: (() -> Void)?) {
+        let alertVC = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+        
+        alertVC.addAction(okAction)
+        present(alertVC, animated: true, completion: nil)
     }
 }

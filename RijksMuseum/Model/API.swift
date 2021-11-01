@@ -20,11 +20,11 @@ class API {
         var stringValue: String {
             switch self {
             case .listAllCollection:
-                return "https://www.rijksmuseum.nl/api/en/collection?key=[\(apiKey)]"
+                return "https://www.rijksmuseum.nl/api/en/collection?key=\(apiKey)"
             case .requestCollectionDetails:
-                return "https://www.rijksmuseum.nl/api/en/collection/SK-C-5?key=[\(apiKey)]"
+                return "https://www.rijksmuseum.nl/api/en/collection/SK-C-5?key=\(apiKey)"
             case .requestCollectionImage:
-                return "https://www.rijksmuseum.nl/api/en/collection/SK-C-5/tiles?key=[\(apiKey)]"
+                return "https://www.rijksmuseum.nl/api/en/collection/SK-C-5/tiles?key=\(apiKey)"
             }
         }
     }
