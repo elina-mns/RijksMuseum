@@ -12,8 +12,8 @@ class API {
     
     enum EndPoints {
         case listAllCollection
-        case requestCollectionDetails
-        case requestCollectionImage
+        case requestCollectionDetails(artObject: String)
+        case requestCollectionImage(artObject: String)
         var url: URL {
             return URL(string: self.stringValue)!
         }
@@ -21,10 +21,10 @@ class API {
             switch self {
             case .listAllCollection:
                 return "https://www.rijksmuseum.nl/api/en/collection?key=\(apiKey)"
-            case .requestCollectionDetails:
-                return "https://www.rijksmuseum.nl/api/en/collection/SK-C-5?key=\(apiKey)"
-            case .requestCollectionImage:
-                return "https://www.rijksmuseum.nl/api/en/collection/SK-C-5/tiles?key=\(apiKey)"
+            case let .requestCollectionDetails(artObject):
+                return "https://www.rijksmuseum.nl/api/en/collection/\(artObject)?key=\(apiKey)"
+            case let .requestCollectionImage(artObject):
+                return "https://www.rijksmuseum.nl/api/en/collection/\(artObject)/tiles?key=\(apiKey)"
             }
         }
     }
@@ -37,6 +37,19 @@ class API {
             }
             let decoder = JSONDecoder()
             let downloadedImageData = try! decoder.decode(RijksData.self, from: data)
+            completionHandler(downloadedImageData, nil)
+        })
+        task.resume()
+    }
+    
+    func requestCollectionDetails(with artObject: String, completionHandler: @escaping (ArtObject?, Error?) -> Void) {
+        let task = URLSession.shared.dataTask(with: EndPoints.requestCollectionImage(artObject: artObject).url, completionHandler: { (data, response, error) in
+            guard let data = data else {
+                completionHandler(nil, error)
+                return
+            }
+            let decoder = JSONDecoder()
+            let downloadedImageData = try! decoder.decode(ArtObject.self, from: data)
             completionHandler(downloadedImageData, nil)
         })
         task.resume()

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class CollectionViewController: UIViewController, UICollectionViewDelegate {
     
     enum Section {
       case main
@@ -17,7 +17,6 @@ class ViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var count: UILabel!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
-    
     
     var museumCollection: RijksData?
     
@@ -29,10 +28,11 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView.register(ArtElementCollectionViewCell.nib(), forCellWithReuseIdentifier: ArtElementCollectionViewCell.identifier)
+        collectionView.delegate = self
         fetchMuseumCollection()
         applySnapshot(animatingDifferences: false)
     }
-    
+        
     func makeDataSource() -> DataSource {
         let dataSource = DataSource(
             collectionView: collectionView,
@@ -53,13 +53,11 @@ class ViewController: UIViewController {
                             DispatchQueue.main.async {
                                 cell?.imageView.image = image
                                 cell?.activityIndicator.stopAnimating()
-                                self.activityIndicator.stopAnimating()
                             }
                         } else {
                             DispatchQueue.main.async {
                                 cell?.imageView.image = UIImage(named: "error")
                                 cell?.activityIndicator.stopAnimating()
-                                self.activityIndicator.stopAnimating()
                             }
                         }
                     }
@@ -85,15 +83,22 @@ class ViewController: UIViewController {
                 DispatchQueue.main.async {
                     self.showAlert(title: "Error", message: "Couldn't upload data this time.", okAction: nil)
                     self.activityIndicator.stopAnimating()
+                    self.activityIndicator.isHidden = true
                 }
                 return
             }
             self.museumCollection = responseExpected
             DispatchQueue.main.async {
                 self.activityIndicator.stopAnimating()
+                self.activityIndicator.isHidden = true
                 self.applySnapshot()
             }
         }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let image = dataSource.itemIdentifier(for: indexPath) else { return }
+        
     }
 }
 
