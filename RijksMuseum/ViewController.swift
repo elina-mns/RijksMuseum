@@ -15,6 +15,9 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var topLabel: UILabel!
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var count: UILabel!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    
     
     var museumCollection: RijksData?
     
@@ -43,19 +46,25 @@ class ViewController: UIViewController {
                 let museumItem = item?.artObjects[indexPath.row]
                 cell?.name.text = museumItem?.longTitle
                 
+                cell?.activityIndicator.startAnimating()
                 if museumItem?.webImage.url != nil {
                     cell?.imageView.downloaded(from: (museumItem?.webImage.url!)!) { (image) in
                         if image != nil {
                             DispatchQueue.main.async {
                                 cell?.imageView.image = image
+                                cell?.activityIndicator.stopAnimating()
+                                self.activityIndicator.stopAnimating()
                             }
                         } else {
                             DispatchQueue.main.async {
                                 cell?.imageView.image = UIImage(named: "error")
+                                cell?.activityIndicator.stopAnimating()
+                                self.activityIndicator.stopAnimating()
                             }
                         }
                     }
                 }
+                self.count.text = "Found: \(self.museumCollection?.count ?? 0) works"
                 return cell
             })
         return dataSource
@@ -70,42 +79,54 @@ class ViewController: UIViewController {
     }
     
     func fetchMuseumCollection() {
+        activityIndicator.startAnimating()
         API().requestRijksCollection { (response, error) in
             guard let responseExpected = response else {
                 DispatchQueue.main.async {
                     self.showAlert(title: "Error", message: "Couldn't upload data this time.", okAction: nil)
+                    self.activityIndicator.stopAnimating()
                 }
                 return
             }
             self.museumCollection = responseExpected
             DispatchQueue.main.async {
+                self.activityIndicator.stopAnimating()
                 self.applySnapshot()
             }
         }
     }
-    
 }
-    
-//MARK: - Extension for UIImageView to process the link in JSON
 
+//MARK: - Extension for UIImageView to process the link in JSON and to cache an image based on URL
+
+let imageCache = NSCache<NSString, UIImage>()
 extension UIImageView {
     
     func downloaded(from url: URL, completion: ((UIImage?) -> Void)? = nil) {
-        URLSession.shared.dataTask(with: url) { data, response, error in
+        // check cached image
+        if let cachedImage = imageCache.object(forKey: url.path as NSString)  {
+            self.image = cachedImage
+            return
+        }
+
+        // if not, download image from url
+        URLSession.shared.dataTask(with: url, completionHandler: { [weak self] (data, response, error) in
             guard
                 let httpURLResponse = response as? HTTPURLResponse, httpURLResponse.statusCode == 200,
                 let mimeType = response?.mimeType, mimeType.hasPrefix("image"),
                 let data = data, error == nil,
                 let image = UIImage(data: data)
             else {
-                completion?(nil)
+                DispatchQueue.main.async() {
+                    completion?(nil)
+                }
                 return
             }
-            DispatchQueue.main.async() { [weak self] in
+            DispatchQueue.main.async() {
                 self?.image = image
                 completion?(image)
             }
-        }.resume()
+        }).resume()
     }
 }
 

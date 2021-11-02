@@ -17,14 +17,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Beautiful collection of the famous Dutch Rijksmuseum" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iny-WN-7eH">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rijksmuseum collection" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iny-WN-7eH">
                                 <rect key="frame" x="30" y="64" width="364" height="48.5"/>
                                 <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="21"/>
-                                <color key="textColor" red="0.89502239230000002" green="0.89252072569999996" blue="0.97648245099999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="obe-Ne-MWk">
-                                <rect key="frame" x="20" y="132.5" width="374" height="709.5"/>
+                                <rect key="frame" x="20" y="173.5" width="374" height="668.5"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="n7U-tN-W8f">
                                     <size key="itemSize" width="128" height="128"/>
@@ -43,13 +43,29 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PXy-zE-bGY">
+                                <rect key="frame" x="20" y="132.5" width="374" height="21"/>
+                                <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="18"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="highlightedColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </label>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" id="giQ-jb-F8u">
+                                <rect key="frame" x="197" y="133" width="20" height="20"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="color" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="labelColor"/>
                         <constraints>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="iny-WN-7eH" secondAttribute="trailing" constant="20" id="23G-9o-q8Q"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="PXy-zE-bGY" secondAttribute="trailing" constant="20" id="2Hg-q7-Gju"/>
+                            <constraint firstItem="obe-Ne-MWk" firstAttribute="top" secondItem="giQ-jb-F8u" secondAttribute="bottom" constant="20.5" id="Bpa-vw-s6b"/>
+                            <constraint firstItem="PXy-zE-bGY" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="JFs-bg-zea"/>
+                            <constraint firstItem="PXy-zE-bGY" firstAttribute="top" secondItem="iny-WN-7eH" secondAttribute="bottom" constant="20" id="JQR-0J-gNu"/>
                             <constraint firstItem="iny-WN-7eH" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="SVN-b6-lHF"/>
-                            <constraint firstItem="obe-Ne-MWk" firstAttribute="top" secondItem="iny-WN-7eH" secondAttribute="bottom" constant="20" id="TAd-tc-0Af"/>
+                            <constraint firstItem="obe-Ne-MWk" firstAttribute="top" secondItem="PXy-zE-bGY" secondAttribute="bottom" constant="20" id="XE4-1S-2GE"/>
+                            <constraint firstItem="giQ-jb-F8u" firstAttribute="top" secondItem="iny-WN-7eH" secondAttribute="bottom" constant="20.5" id="ZRB-gy-dml"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="obe-Ne-MWk" secondAttribute="trailing" constant="20" id="b1y-4H-Wtb"/>
                             <constraint firstItem="obe-Ne-MWk" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="lZq-Pi-WfX"/>
                             <constraint firstItem="iny-WN-7eH" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="30" id="mTa-b3-ReW"/>
@@ -57,7 +73,9 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="activityIndicator" destination="giQ-jb-F8u" id="pQc-LI-apw"/>
                         <outlet property="collectionView" destination="obe-Ne-MWk" id="PH3-13-vSw"/>
+                        <outlet property="count" destination="PXy-zE-bGY" id="ujx-V8-unn"/>
                         <outlet property="topLabel" destination="iny-WN-7eH" id="o54-PQ-Xze"/>
                     </connections>
                 </viewController>
