@@ -42,14 +42,14 @@ class API {
         task.resume()
     }
     
-    func requestCollectionDetails(with artObject: String, completionHandler: @escaping (ArtObject?, Error?) -> Void) {
-        let task = URLSession.shared.dataTask(with: EndPoints.requestCollectionImage(artObject: artObject).url, completionHandler: { (data, response, error) in
+    func requestCollectionDetails(with artObject: String, completionHandler: @escaping (ArtObjectDetails?, Error?) -> Void) {
+        let task = URLSession.shared.dataTask(with: EndPoints.requestCollectionDetails(artObject: artObject).url, completionHandler: { (data, response, error) in
             guard let data = data else {
                 completionHandler(nil, error)
                 return
             }
             let decoder = JSONDecoder()
-            let downloadedImageData = try! decoder.decode(ArtObject.self, from: data)
+            let downloadedImageData = try! decoder.decode(ArtObjectDetails.self, from: data)
             completionHandler(downloadedImageData, nil)
         })
         task.resume()
