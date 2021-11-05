@@ -22,6 +22,7 @@ class DetailsViewController: UIViewController {
     @IBOutlet weak var actualPlaceOfDeath: UILabel!
     @IBOutlet weak var descriptionOfPiece: UILabel!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var closeButton: UIButton!
     
     var artObject: ArtObjectDetails?
     var objectNumber: String = ""
@@ -34,6 +35,7 @@ class DetailsViewController: UIViewController {
         dateOfDeathLabel.text = "Date of Death: "
         placeOfDeathLabel.text = "Place of Death: "
         fetchDetailsOnPiece()
+        closeButton.addTarget(self, action: #selector(close), for: .touchUpInside)
     }
     
     func fetchDetailsOnPiece() {
@@ -48,16 +50,20 @@ class DetailsViewController: UIViewController {
                 return
             }
             self.artObject = responseExpected
-            self.actualName.text = self.artObject?.makers?.name
-            self.actualDateOfBirth.text = self.artObject?.makers?.dateOfBirth
-            self.actualPlaceOfBirth.text = self.artObject?.makers?.placeOfBirth
-            self.actualDateOfDeath.text = self.artObject?.makers?.dateOfDeath
-            self.actualPlaceOfDeath.text = self.artObject?.makers?.placeOfDeath
-            self.descriptionOfPiece.text = self.artObject?.plaqueDescriptionEnglish
             DispatchQueue.main.async {
+                self.actualName.text = self.artObject?.makers?.name
+                self.actualDateOfBirth.text = self.artObject?.makers?.dateOfBirth
+                self.actualPlaceOfBirth.text = self.artObject?.makers?.placeOfBirth
+                self.actualDateOfDeath.text = self.artObject?.makers?.dateOfDeath
+                self.actualPlaceOfDeath.text = self.artObject?.makers?.placeOfDeath
+                self.descriptionOfPiece.text = self.artObject?.plaqueDescriptionEnglish
                 self.activityIndicator.stopAnimating()
                 self.activityIndicator.isHidden = true
             }
         }
+    }
+    
+    @objc func close() {
+        self.dismiss(animated: true, completion: nil)
     }
 }

@@ -122,6 +122,12 @@
                                                 <rect key="frame" x="197" y="215" width="20" height="20"/>
                                                 <color key="color" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </activityIndicatorView>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NYn-Z2-pyO">
+                                                <rect key="frame" x="366.5" y="30" width="17.5" height="36"/>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
+                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <state key="normal" image="xmark" catalog="system"/>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
@@ -138,6 +144,7 @@
                                             <constraint firstItem="xKH-TU-hkc" firstAttribute="leading" secondItem="bUU-cP-IXw" secondAttribute="leading" id="MQh-ct-O2b"/>
                                             <constraint firstItem="9RV-hV-piG" firstAttribute="top" secondItem="Upi-iK-WjS" secondAttribute="bottom" constant="5" id="Mhc-HX-9nM"/>
                                             <constraint firstItem="9VN-hG-Bbw" firstAttribute="leading" secondItem="bUU-cP-IXw" secondAttribute="leading" constant="20" id="OrP-t2-d1K"/>
+                                            <constraint firstAttribute="trailing" secondItem="NYn-Z2-pyO" secondAttribute="trailing" constant="30" id="T4y-7k-gFb"/>
                                             <constraint firstItem="0nx-LR-0Rg" firstAttribute="leading" secondItem="bUU-cP-IXw" secondAttribute="leading" constant="20" id="Uri-hV-JPf"/>
                                             <constraint firstItem="Upi-iK-WjS" firstAttribute="leading" secondItem="bUU-cP-IXw" secondAttribute="leading" constant="20" id="UuH-mH-KjS"/>
                                             <constraint firstAttribute="trailing" secondItem="9VN-hG-Bbw" secondAttribute="trailing" constant="10" id="WYk-W7-2n4"/>
@@ -145,6 +152,7 @@
                                             <constraint firstItem="oVd-cC-muD" firstAttribute="leading" secondItem="bUU-cP-IXw" secondAttribute="leading" constant="10" id="doH-7q-qU3"/>
                                             <constraint firstAttribute="trailing" secondItem="0nx-LR-0Rg" secondAttribute="trailing" constant="10" id="fwY-8O-kgj"/>
                                             <constraint firstItem="wDb-NA-jZr" firstAttribute="leading" secondItem="bUU-cP-IXw" secondAttribute="leading" constant="20" id="kqz-8U-mVx"/>
+                                            <constraint firstItem="NYn-Z2-pyO" firstAttribute="top" secondItem="bUU-cP-IXw" secondAttribute="top" constant="30" id="nH1-YI-mvU"/>
                                             <constraint firstItem="9VN-hG-Bbw" firstAttribute="top" secondItem="wDb-NA-jZr" secondAttribute="bottom" constant="5" id="nhD-Jc-TSJ"/>
                                             <constraint firstItem="Upi-iK-WjS" firstAttribute="top" secondItem="xKH-TU-hkc" secondAttribute="bottom" constant="5" id="pXr-X8-dw8"/>
                                             <constraint firstAttribute="trailing" secondItem="wDb-NA-jZr" secondAttribute="trailing" constant="10" id="vVz-84-dhU"/>
@@ -185,6 +193,7 @@
                         <outlet property="actualPlaceOfBirth" destination="m5T-GM-xr4" id="xIK-nQ-bF1"/>
                         <outlet property="actualPlaceOfDeath" destination="aeq-wD-dmV" id="Q4A-XW-A0a"/>
                         <outlet property="artistNameLabel" destination="2dR-0d-uyS" id="yMo-SG-0Vt"/>
+                        <outlet property="closeButton" destination="NYn-Z2-pyO" id="utS-Ay-m3r"/>
                         <outlet property="dateOfBirthLabel" destination="iIo-OO-8g1" id="jKd-1H-G9M"/>
                         <outlet property="dateOfDeathLabel" destination="2wc-aC-gKa" id="tOP-kp-uHd"/>
                         <outlet property="descriptionOfPiece" destination="oVd-cC-muD" id="WPw-G8-1aB"/>
@@ -198,4 +207,7 @@
             <point key="canvasLocation" x="53.623188405797109" y="49.553571428571423"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="xmark" catalog="system" width="128" height="113"/>
+    </resources>
 </document>
