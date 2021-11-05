@@ -46,27 +46,4 @@ struct WebImage: Codable, Hashable {
     let url: URL?
 }
 
-struct ArtObjectDetails: Codable {
-    let objectNumber: String
-    let webImage: WebImage
-    let principalMakers: PrincipalMakers
-    let plaqueDescriptionEnglish: String
-    let subtitle: String
-    
-    enum CodingKeys: String, CodingKey {
-        case objectNumber
-        case webImage
-        case principalMakers
-        case plaqueDescriptionEnglish
-        case subtitle
-    }
-}
 
-struct PrincipalMakers: Codable {
-    let name: String
-    let placeOfBirth: String
-    let dateOfBirth: String
-    let dateOfDeath: String
-    let placeOfDeath: String
-    let nationality: String
-}

@@ -24,6 +24,7 @@ class DetailsViewController: UIViewController {
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     var artObject: ArtObjectDetails?
+    var objectNumber: String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,7 +38,7 @@ class DetailsViewController: UIViewController {
     
     func fetchDetailsOnPiece() {
         activityIndicator.startAnimating()
-        API().requestCollectionDetails(with: artObject?.objectNumber ?? "") { (response, error) in
+        API().requestCollectionDetails(with: objectNumber) { (response, error) in
             guard let responseExpected = response else {
                 DispatchQueue.main.async {
                     self.showAlert(title: "Error", message: "Couldn't upload data this time.", okAction: nil)
@@ -47,11 +48,11 @@ class DetailsViewController: UIViewController {
                 return
             }
             self.artObject = responseExpected
-            self.actualName.text = self.artObject?.principalMakers.name
-            self.actualDateOfBirth.text = self.artObject?.principalMakers.dateOfBirth
-            self.actualPlaceOfBirth.text = self.artObject?.principalMakers.placeOfBirth
-            self.actualDateOfDeath.text = self.artObject?.principalMakers.dateOfDeath
-            self.actualPlaceOfDeath.text = self.artObject?.principalMakers.placeOfDeath
+            self.actualName.text = self.artObject?.makers?.name
+            self.actualDateOfBirth.text = self.artObject?.makers?.dateOfBirth
+            self.actualPlaceOfBirth.text = self.artObject?.makers?.placeOfBirth
+            self.actualDateOfDeath.text = self.artObject?.makers?.dateOfDeath
+            self.actualPlaceOfDeath.text = self.artObject?.makers?.placeOfDeath
             self.descriptionOfPiece.text = self.artObject?.plaqueDescriptionEnglish
             DispatchQueue.main.async {
                 self.activityIndicator.stopAnimating()

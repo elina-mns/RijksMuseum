@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		311808632734400F00D6D5BC /* ArtObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311808622734400F00D6D5BC /* ArtObject.swift */; };
 		31884B02272C3F6E0020C358 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31884B01272C3F6E0020C358 /* AppDelegate.swift */; };
 		31884B04272C3F6E0020C358 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31884B03272C3F6E0020C358 /* SceneDelegate.swift */; };
 		31884B06272C3F6E0020C358 /* CollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31884B05272C3F6E0020C358 /* CollectionViewController.swift */; };
@@ -22,6 +23,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		311808622734400F00D6D5BC /* ArtObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtObject.swift; sourceTree = "<group>"; };
 		31884AFE272C3F6E0020C358 /* RijksMuseum.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RijksMuseum.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		31884B01272C3F6E0020C358 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		31884B03272C3F6E0020C358 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -94,6 +96,7 @@
 			children = (
 				31884B17272C470F0020C358 /* RijksData.swift */,
 				31884B15272C3F900020C358 /* API.swift */,
+				311808622734400F00D6D5BC /* ArtObject.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -181,6 +184,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				311808632734400F00D6D5BC /* ArtObject.swift in Sources */,
 				31884B06272C3F6E0020C358 /* CollectionViewController.swift in Sources */,
 				31884B02272C3F6E0020C358 /* AppDelegate.swift in Sources */,
 				31884B18272C470F0020C358 /* RijksData.swift in Sources */,

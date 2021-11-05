@@ -98,7 +98,10 @@ class CollectionViewController: UIViewController, UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let image = dataSource.itemIdentifier(for: indexPath) else { return }
-        
+        let storyBoard: UIStoryboard = UIStoryboard(name: "DetailsStoryboard", bundle: nil)
+        let vc = storyBoard.instantiateViewController(withIdentifier: "DetailsViewController") as! DetailsViewController
+        vc.objectNumber = image.objectNumber
+        self.present(vc, animated: true, completion: nil)
     }
 }
 
